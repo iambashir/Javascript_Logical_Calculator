@@ -1,0 +1,285 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Logical Calculator </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        .btn {
+            height: 60px;
+            width: 90px;
+        }
+        #output_value{color: #1170ca;}
+    </style>
+</head>
+
+<!-- Represented By Bashir Hossain -->
+
+<body style="background-color: #dadada;"> <br>
+    <div class="container" style="background-color: #5f5e68; border-radius: 15px;  
+                width: 360px; box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;"><br>
+        <form name="main_form" action="#" method="get" onsubmit="check(); return false">
+            <div class="form" style="padding: 15px;">
+
+                <input type="text"
+                    style="height: 70px; background-color: #f4fdd1; font-family:'Orbitron', sans-serif; text-align: right;"
+                    id="input_value" class="form-control  btn-basic"><br>
+                <input type="text" style="font-family:'Orbitron', sans-serif; text-align: left; " placeholder="Result"
+                    id="output_value" class="form-control"><br>
+
+                <div style="text-align: center;">
+
+                                <!-- SETTING button by modal  start-->
+                   <button type="button" class="btn btn-dark btn-sm" data-toggle="modal" style="height: 30px;"
+                    data-target="#myModal"> <b>SETTINGS</b>  </button>&nbsp; 
+                  
+                    <div class=" modal fade" id="myModal" role="dialog">
+                      <div class="modal-dialog" style="width: 360px;">
+                        <div class="modal-content">
+                          <div class="modal-header">
+                            <h4 class="modal-title">HOW TO USE</h4> &nbsp;&nbsp;
+                            <button type="button" class="close" data-dismiss="modal"> &times; </button>
+                          </div>
+                          <div class="modal-body">
+                            <p style="text-align: left;"><b>
+                            1. To find Vowel or Consonant you have to &nbsp;&nbsp;&nbsp;&nbsp; use any charecter. <br>
+                            2. To find other option you have to use any &nbsp;&nbsp;&nbsp;&nbsp; number. <br>
+                            3. Avoid any special charecter. <br> 
+                            4. If break above this ruel it will show &nbsp;&nbsp;&nbsp;&nbsp;<i>"Input  Value  Is  Invalid"</i>  <br>
+                            5. Though dot (.) is a special charecter but &nbsp;&nbsp;&nbsp;&nbsp; you can use this within number. <br> <br>
+                                    ***** Thanks for using this calculator *****
+                                </b>
+                            </p>
+                          </div>
+                      </div>
+                    </div>
+                </div> 
+                <!-- SETTING button by modal  End-->
+                        
+                    <button type="button" onclick="mode_1()" style="height: 30px;"
+                        class="btn btn-dark btn-sm"><b>MODE-1</b></button> &nbsp;
+                    <a href="mode_2.html"><button type="button" onclick="mode_2()" style="height: 30px;"
+                            class="btn btn-dark btn-sm"><b>MODE-2</b></button></a>
+                    &nbsp;<br>
+                    <button type="reset" onclick="reset()" value="Reset" class="btn btn-dark"><b>RESET</b></button>&nbsp;&nbsp;                   
+                    <button type="button" onclick="prime()" class="btn btn-info"><b>PRIME</b></button> &nbsp;
+                    <button type="button" onclick="odd_even()" class="btn btn-info"><b>ODD<br>EVEN</b></button>
+                    &nbsp;<br>
+                    <button type="button" onclick="fibonacci()" class="btn btn-info"><b>FIBO.</b></button> &nbsp;
+                    <button type="button" onclick="factorial()" class="btn btn-info"><b>FACT.</b></button> &nbsp;
+                    <button type="button" onclick="vowel_con()" class="btn btn-info"><b>VOWEL<br>CONS.</b></button>
+                    &nbsp;<br>
+                    <button type="button" onclick="rand()" class="btn btn-info"><b>RAND.</b></button> &nbsp;
+                    <button type="button" onclick="ceil()" class="btn btn-info"><b>CEIL</b></button> &nbsp;
+                    <button type="button" onclick="floor()" class="btn btn-info"><b>FLOOR</b></button>
+                    &nbsp;<br>
+                    <button type="button" onclick="gpa()" class="btn btn-info"><b>GPA</b></button> &nbsp;
+                    <button type="button" onclick="divisor()" class="btn btn-info"><b>DIVISOR</b></button> &nbsp;
+                    <button type="button" onclick="num()" class="btn btn-info"><b>DATA<br>TYPE</b></button> &nbsp;
+
+                </div>
+            </div>
+        </form>
+    </div> <br>
+
+    <script>
+        var specialChar = /[`! @#$%^&*()_+\-=\[\]{};'.:"\\|,<>\/?~]/;
+        var specialCharNoDot = /[`! @#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+        var mailFormat = /[ `!#$%^&*()+\=\[\]{};':"\\|,<>\/?~]/;
+        var numberAlphabetOnly = /^[0-9a-zA-Z]+$/;
+        var letterFormat = /^[A-Za-z]+$/;
+        var numFormat = /^[0-9]+$/;
+        // USED INVALID CHAR OR SIGN
+        // USED INVALID NUMBER OR CHAR.
+        // INPUT VALUE IS INVALID
+
+        // Grading System
+        function gpa() {
+            var marks = parseInt(document.getElementById("input_value").value);
+            if ( marks=="" || marks > 100 || marks < 0 || letterFormat.test(marks) || specialCharNoDot.test(marks))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else if (marks >= 80) document.getElementById("output_value").value = "GPA Grade is: A+";
+            else if (marks >= 70) document.getElementById("output_value").value = "GPA Grade is: A";
+            else if (marks >= 60) document.getElementById("output_value").value = "GPA Grade is: A-";
+            else if (marks >= 50) document.getElementById("output_value").value = "GPA Grade is: B";
+            else if (marks >= 40) document.getElementById("output_value").value = "GPA Grade is: C";
+            else if (marks >= 33) document.getElementById("output_value").value = "GPA Grade is: D";
+            else document.getElementById("output_value").value = "Fail";
+        }
+
+        // Reset Calculator - Bashir Hossasin
+        function reset() {
+            document.getElementById("main_form").reset();
+        }
+
+        // ODD & Even Number - Bashir Hossain
+        function odd_even() {
+            var num = document.getElementById("input_value").value;
+            if ( num =="" || letterFormat.test(num) || specialChar.test(num))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else if (num % 2 == 0) {
+                document.getElementById("output_value").value = num + " - is an Even number";
+            } else { document.getElementById("output_value").value = num + " - is an Odd number"; }
+        }
+
+        // Prime number
+        function prime() {
+            var input = document.getElementById("input_value").value;
+            if ( input=="" || letterFormat.test(input) || specialChar.test(input))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else {
+                var flag = true;
+                if ((input == 0) || (input == 1)) {
+                    document.getElementById("output_value").value = "Not Prime Number";
+                } else {
+                    for (var i = 2; i < input; i++) {
+                        if (input % i == 0) {
+                            flag = false;
+                            break;
+                        }
+                    }
+                    if (flag) {
+                        document.getElementById("output_value").value = "Prime Number";
+                    } else document.getElementById("output_value").value = "Not Prime Number";
+                }
+                
+            }
+        }
+
+        // fibonacci
+        function fibonacci() {
+            var specialCharDot = /[`! @#$%^&*()_+\-=\[\]{};'.:"\\|,<>\/?~]/;
+            var input = document.getElementById("input_value").value;
+            if (input=="" || letterFormat.test(input) || specialCharDot.test(input))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            var fibonacci_series = function (input) {
+                if (input === 1) {
+                    return [0, 1];
+                }
+                else {
+                    var s = fibonacci_series(input - 1);
+                    s.push(s[s.length - 1] + s[s.length - 2]);
+                    return s;
+                }
+            };
+            document.getElementById("output_value").value = fibonacci_series(input);
+        }
+
+        // factorial
+        function factorial() {
+            var input = document.getElementById("input_value").value;
+            if (input=="" || letterFormat.test(input) || specialCharNoDot.test(input))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else {
+                var factorial = 1;//initial factorial value is 1 because we can multiply 1*n = n
+                for (var i = input; i > 0; i--) {
+                    factorial *= i;
+                }
+                document.getElementById("output_value").value = factorial;
+            }
+        }
+        // vowel & consonant
+        function vowel_con() {
+            var letter = document.getElementById("input_value").value;
+            letterD = letter.toLowerCase();
+            if ( letterD=="" || specialChar.test(letterD) || numFormat.test(letterD))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else if (letterD == "a" || letterD == "e" || letterD == "i" || letterD == "o" || letterD == "u")
+                document.getElementById("output_value").value = "Vowel";
+            else document.getElementById("output_value").value = "Consonant";
+        }
+
+        // divisor
+        function divisor() {
+            var n = document.getElementById("input_value").value;
+            if (n=="" || specialChar.test(n) || letterFormat.test(n))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else {
+                var isTrue = true;
+                var divisiors = "";
+                //checking n = 0 or n = 1
+                if ((n == 0) || (n == 1)) {
+                    document.getElementById("output_value").value = n;
+                } else {
+                    for (var i = 2; i < n; i++) {
+                        if (n % i == 0) {
+                            isTrue = false;
+                            break;
+                        }
+                    }
+                }
+                if (isTrue) {
+                    document.getElementById("output_value").value = "1, " + n;
+                } else {
+                    for (var i = 1; i <= n; i++) {
+                        if (n % i == 0) {
+                            divisiors += i + ", ";
+                        }
+                    }
+                    divisiors;
+
+                    document.getElementById("output_value").value = "1, " + n;
+                    document.getElementById("output_value").value = divisiors;
+                }
+            }
+        }
+
+        // data type
+        function num() {
+            const funFormat = /[{}()]/;
+            const opaFormat = /([+*/%-])/;
+            var n = document.getElementById("input_value").value;
+            if (n== ""){
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";  
+            }else{
+                if (funFormat.test(n)) {
+                    document.getElementById("output_value").value = "function";
+                } else if (opaFormat.test(n)) {
+                    document.getElementById("output_value").value = "operator";
+                } else if (!isNaN(n)) {
+                    document.getElementById("output_value").value = typeof parseInt(n);
+                } else {
+                    if (n.toLowerCase() == "true" || n.toLowerCase() == "false") {
+                        document.getElementById("output_value").value = "boolean";
+                    } else if (n.toLowerCase() == "nan") {
+                        document.getElementById("output_value").value = "Number";
+                    } else {
+                        document.getElementById("output_value").value = typeof n;
+                    }
+                }
+            }
+        }
+        // Random Number
+        function rand() {
+            var specChar = /[`! @#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+            var randNum = document.getElementById("input_value").value;
+            if ( randNum=="" || letterFormat.test(randNum) || specChar.test(randNum))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else document.getElementById("output_value").value = Math.floor(Math.random() * randNum) + 1;
+        }
+        // Ceil Number
+        function ceil() {
+            var specChar = /[`! @#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+            var ceilNum = document.getElementById("input_value").value;
+            if ( ceilNum=="" || letterFormat.test(ceilNum) || specChar.test(ceilNum))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else document.getElementById("output_value").value = Math.ceil(ceilNum);
+        }
+
+        // Ceil Number
+        function floor() {
+            var specChar = /[`! @#$%^&*()_+\-=\[\]{};':"\\|,<>\/?~]/;
+            var floorNum = document.getElementById("input_value").value;
+            if (floorNum=="" || letterFormat.test(floorNum) || specChar.test(floorNum))
+                document.getElementById("output_value").value = "Input  Value  Is  Invalid";
+            else document.getElementById("output_value").value = Math.floor(floorNum);
+        }
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>

@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title> Mode-2 </title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <link rel="preconnect" href="https://fonts.gstatic.com">
+    <link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&display=swap" rel="stylesheet">
+    <style>
+        .btn {
+            height: 70px;
+            width: 90px;
+        } 
+    </style>
+</head>
+
+<!-- Represented By Bashir Hossain -->
+
+<body style="background-color: #dadada;"> <br>
+    <div class="container" style="background-color: #5f5e68; border-radius: 15px;  
+                width: 360px; box-shadow: 0 4px 8px 0 #00000033, 0 6px 20px 0 #00000030;"><br>
+        <form name="main_form" action="#" method="get" onsubmit="check(); return false">
+            <div class="form" style="padding: 15px;">
+
+     <input type="text" disabled style="height: 70px; background-color: #f4fdd1; font-family:'Orbitron', sans-serif; text-align: right;"
+             id="input_value" class="form-control  btn-basic"><br>
+     <input type="text" style="font-family:'Orbitron', sans-serif; text-align: left; "
+             placeholder="Result" id="output_value" class="form-control"><br>
+
+                <!-- <div style="font-family: 'Orbitron', sans-serif;">12:04PM</div> -->
+
+                <div style="text-align: center;">
+                    <button type="button"  style="height: 30px;" class="btn btn-dark btn-sm"><b>SETTING</b></button> &nbsp;
+                    <a href="index.html"><button type="button" style="height: 30px;" class="btn btn-dark btn-sm"><b>MODE-1</b></button></a> &nbsp;
+                    <button type="button"  style="height: 30px;" class="btn btn-dark btn-sm"><b>MODE-2</b></button>
+                    &nbsp;<br>
+                    <button type="reset"  style="height: 40px; width: 63px;" onclick="reset()" value="Reset" class="btn btn-dark"><b>AC</b></button>&nbsp;&nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnRoot" class="btn btn-info">&radic;</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnMod" class="btn btn-info">%</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnDiv" class="btn btn-info">/</button> &nbsp;
+                    &nbsp;<br>
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn7" class="btn btn-info">7</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn8" class="btn btn-info">8</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn9" class="btn btn-info">9</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnMul" class="btn btn-info">*</button> &nbsp;
+                    &nbsp;<br>
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn4" class="btn btn-info">4</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn5" class="btn btn-info">5</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn6" class="btn btn-info">6</button> &nbsp;
+                    <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnSub" class="btn btn-info">-</button> &nbsp;
+                    &nbsp;<br>
+                    <div style="margin-left: -68px; margin-top: -20px; padding-top: 20px; padding-bottom: 15px;">
+                        <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn1" class="btn btn-info">1</button> &nbsp;
+                        <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn2" class="btn btn-info">2</button> &nbsp;
+                        <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn3" class="btn btn-info">3</button> &nbsp;
+                    </div>
+                    
+                    <div style="margin-left: -70px; padding-top: 10px;">
+                        <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btn0" class="btn btn-info">0</button> &nbsp;
+                        <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnDot" class="btn btn-info">.</button> &nbsp;
+                        <button type="button" style="height: 40px; width: 63px;" onclick="buttonClicked(event)" id="btnEql" class="btn btn-info">=</button> &nbsp;
+                    </div> 
+                    <button type="button" style="height: 106px; width: 63px; margin-left: 76.5%; margin-top: -44%;" onclick="buttonClicked(event)" id="btnAdd" class="btn btn-info">+</button>  
+
+                </div>
+            </div>
+        </form>
+    </div> <br>
+    <script>
+        var opr = "";
+
+        buttonClicked = function() {
+            var e = window.event;
+            var btn = e.target || e.srcElement;
+            if(btn.id == "btnEql"){
+                var str = document.getElementById("input_value").value.split(opr);
+                if(opr == "+"){
+                    document.getElementById("output_value").value = parseFloat(str[0]) + parseFloat(str[1]);
+                }else if(opr == "-"){
+                    document.getElementById("output_value").value = parseFloat(str[0]) - parseFloat(str[1]);
+                }else if(opr == "%"){
+                    document.getElementById("output_value").value = parseFloat(str[0]) % parseFloat(str[1]);
+                }else if(opr == "/"){
+                    document.getElementById("output_value").value = parseFloat(str[0]) / parseFloat(str[1]);
+                }else if(opr == "*"){
+                    document.getElementById("output_value").value = parseFloat(str[0]) * parseFloat(str[1]);
+                }else{
+                    document.getElementById("output_value").value = Math.sqrt(str[1]);
+                }
+            }else{
+                document.getElementById("input_value").value +=  btn.innerHTML;
+                if(btn.id == "btnRoot" || btn.id == "btnMod" || btn.id == "btnDiv" || btn.id == "btnMul" || btn.id == "btnSub" || btn.id == "btnAdd"){
+                    opr = btn.innerHTML;
+                }
+            }
+        }
+
+    </script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.16.0/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+
+</html>
